@@ -16,15 +16,16 @@ public class DataBaseExemple {
      private List<Order> orders;
      private DateTimeFormatter formatter;
 
-     public DataBaseExemple getDataBaseExemple(){
+     public static DataBaseExemple getDataBaseExemple(){
          if(Objects.isNull(dataBaseExemple)){
              dataBaseExemple = new DataBaseExemple();
          }
-         return this.dataBaseExemple;
+         return dataBaseExemple;
      }
 
     private DataBaseExemple() {
         this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.orders = setExemples();
     }
 
     public List<Order> getOrdesForTest(){
