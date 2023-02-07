@@ -25,11 +25,11 @@ public class ConsoleMenu {
             System.out.println("Ola, escolha o que deseja fazer!\n1 - Fazer filtragem\n2 - Sair\nDigite: ");
             aux = ler.nextInt();
             if (aux == 1)
-                menu();
+                menuFiltragem();
         }
     }
 
-    private void menu(){
+    private void menuFiltragem(){
         System.out.println("Ola!\nEscreva a primeira data: (yyyy-mm-dd)");
         String textoDigitado = ler.next();
         LocalDateTime primeiraData = LocalDateTime.parse(textoDigitado + " 00:00:00", this.formatter);
@@ -41,10 +41,10 @@ public class ConsoleMenu {
 
         List<Order> lista = orderService.getOrdersByDataAndProduct(primeiraData, segundaData, produtoNome);
 
-        detalharOrders(lista);
+        detalharOrders(lista, primeiraData, segundaData);
     }
 
-    private void detalharOrders(List<Order> lista){
+    private void detalharOrders(List<Order> lista, LocalDateTime primeiraData, LocalDateTime segundaData){
 
         System.out.println("---------------------LISTA---------------------");
         HashMap<Integer, Integer> contadores = new HashMap<>();
@@ -59,11 +59,18 @@ public class ConsoleMenu {
             }
 
         }
+        for(int ano = primeiraData.getYear();  ano <= segundaData.getYear(); ano++){
+            if (!contadores.containsKey(ano)) {
+                contadores.put(ano, 0);
+            }
+        }
 
         contadores.entrySet()
                 .stream()
                 .sorted(Map.Entry.<Integer, Integer>comparingByKey())
                 .forEach(System.out::println);
+
+        System.out.println("-----------------------------------------------\n\n");
 
     }
 

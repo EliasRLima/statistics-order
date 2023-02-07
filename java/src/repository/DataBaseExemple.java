@@ -37,9 +37,11 @@ public class DataBaseExemple {
 
         for( Item item : getItemExemples()){
             for(int aux = 200, ano = 2017; ano < 2022;ano++, aux-=50){
-                List<Item> listaExemplo = new ArrayList<Item>();
-                listaExemplo.add(item);
-                list.add(new Order(listaExemplo, "name exemple", "email@exemple.com", "street exemple, 01", item.getCost(),LocalDateTime.parse(ano+"-01-01 08:00", this.formatter)));
+                for(int i = 0; i < aux; i++){
+                    List<Item> listaExemplo = new ArrayList<Item>();
+                    listaExemplo.add(item);
+                    list.add(new Order(listaExemplo, "name exemple", "email@exemple.com", "street exemple, 01", item.getCost(),LocalDateTime.parse(ano+"-01-01 08:00", this.formatter)));
+                }
             }
         }
         return list;
