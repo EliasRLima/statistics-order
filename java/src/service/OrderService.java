@@ -16,9 +16,9 @@ public class OrderService {
         this.repository = DataBaseExemple.getDataBaseExemple();
     }
 
-    public List<Order> getOrdersByDataAndProduct(LocalDateTime datainicio, LocalDateTime dataFim, Product product){
+    public List<Order> getOrdersByDataAndProduct(LocalDateTime datainicio, LocalDateTime dataFim, String productName){
         List<Order> lista = repository.getOrdesForTest();
-        List<Order> listaFiltradaPorProduto = lista.stream().filter(order -> order.getItemList().stream().anyMatch(item -> item.getProduto().getName().equals(product.getName()))).toList();
+        List<Order> listaFiltradaPorProduto = lista.stream().filter(order -> order.getItemList().stream().allMatch(item -> item.getProduto().getName().equals(productName))).toList();
         return listaFiltradaPorProduto.stream().filter(order -> order.getCreateDate().isAfter(datainicio) && order.getCreateDate().isBefore(dataFim)).collect(Collectors.toList());
     }
 }
