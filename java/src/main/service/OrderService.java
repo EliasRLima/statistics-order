@@ -1,8 +1,7 @@
-package service;
+package main.service;
 
-import model.Order;
-import model.Product;
-import repository.DataBaseExemple;
+import main.model.Order;
+import main.repository.DataBaseExemple;
 
 import java.time.LocalDateTime;
 import java.util.List;

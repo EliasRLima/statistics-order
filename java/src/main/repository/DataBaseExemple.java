@@ -1,8 +1,8 @@
-package repository;
+package main.repository;
 
-import model.Item;
-import model.Order;
-import model.Product;
+import main.model.Item;
+import main.model.Order;
+import main.model.Product;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

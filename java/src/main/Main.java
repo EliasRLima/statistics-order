@@ -1,4 +1,6 @@
-import menu.ConsoleMenu;
+package main;
+
+import main.menu.ConsoleMenu;
 
 public class Main {
     public static void main(String[] args) {
