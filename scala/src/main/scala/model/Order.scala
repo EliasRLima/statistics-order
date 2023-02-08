@@ -1,7 +1,6 @@
 package model
 
 import java.time.LocalDateTime
-import scala.::
 
 class Order {
 
