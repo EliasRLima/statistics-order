@@ -1,7 +1,9 @@
-package menu;
+package main.menu;
 
-import model.Order;
-import service.OrderService;
+import main.exception.MessageProperties;
+import main.exception.SystemException;
+import main.model.Order;
+import main.service.OrderService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,12 +34,28 @@ public class ConsoleMenu {
     private void menuFiltragem(){
         System.out.println("Ola!\nEscreva a primeira data: (yyyy-mm-dd)");
         String textoDigitado = ler.next();
-        LocalDateTime primeiraData = LocalDateTime.parse(textoDigitado + " 00:00:00", this.formatter);
+        LocalDateTime primeiraData = LocalDateTime.now();
+        try {
+            primeiraData = LocalDateTime.parse(textoDigitado + " 00:00:00", this.formatter);
+        }catch (Exception e){
+            throw new SystemException(
+                    MessageProperties.getMensagemPadrao("erro.formato.data"));
+        }
+
         System.out.println("Escreva a segunda data: (yyyy-mm-dd)");
         textoDigitado = ler.next();
-        LocalDateTime segundaData = LocalDateTime.parse(textoDigitado+ " 00:00:00", this.formatter);
+        LocalDateTime segundaData = LocalDateTime.now();
+        try {
+           segundaData = LocalDateTime.parse(textoDigitado+ " 00:00:00", this.formatter);
+        }catch (Exception e){
+            throw new SystemException(
+                    MessageProperties.getMensagemPadrao("erro.formato.data"));
+        }
+
         System.out.println("Qual o nome do produto?");
         String produtoNome = ler.next();
+
+
 
         List<Order> lista = orderService.getOrdersByDataAndProduct(primeiraData, segundaData, produtoNome);
 
